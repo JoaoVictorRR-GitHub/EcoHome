@@ -53,7 +53,8 @@ class _AreaEquipamentosState extends State<AreaEquipamentos> {
         ),
         espacamentoV,
         Expanded(
-          child: ListView.builder(
+          child: (equipamentos.isEmpty) ? widgetEquipamentoVazio :
+          ListView.builder(
             itemCount: equipamentos.length,
             itemBuilder: (context, index) {
               return Padding(
