@@ -27,14 +27,25 @@ class Equipamento {
 
   /// Energia do equipamento consumida no mês (kW/h).
   double consumoEnergia;
+  /// Energia gerada/retornada pelo equipamento (kW/h).
+  double geracaoEnergia;
 
-  Equipamento({this.nome = '', this.tipo = TipoEnum.outros, this.marca = '', this.modelo = '', this.consumoEnergia = 0.0});
+  /// Construtor da classe Equipamento.
+  Equipamento({
+    this.nome   = '',
+    this.tipo   = TipoEnum.outros,
+    this.marca  = '',
+    this.modelo = '',
+    this.consumoEnergia = 0.0,
+    this.geracaoEnergia = 0.0
+  });
 }
 
 
 /// ###### Lista dos equipamentos cadastrados no sistema.
 List<Equipamento> equipamentos = [
   Equipamento(nome: 'Geladeira One Piece',      tipo:  TipoEnum.geladeira,      marca: 'Usopp',         modelo: 'Zoro Perdido'),
+  Equipamento(nome: 'Geladeira Galáctica',      tipo:  TipoEnum.geladeira,      marca: 'Garp',          modelo: 'Punho do Amor'),
   Equipamento(nome: 'Ar-Condicionado Ice Time', tipo:  TipoEnum.arCondicionado, marca: 'Franky House',  modelo: 'Aokiji Dorminhoco'),
   Equipamento(nome: 'Painel Solar Sunny',       tipo:  TipoEnum.painelSolar,    marca: 'Franky House',  modelo: 'Laser Energético'),
   Equipamento(nome: 'Lâmpada Infinita',         tipo:  TipoEnum.lampada,        marca: 'Borsalino',     modelo: 'Solar'),
