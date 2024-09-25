@@ -45,8 +45,8 @@ class _MyHomePageState extends State<MyHomePage> {
   var _paginaIndex = 0;
   final List _paginas = [
     {'pagina': const AreaHome(),            'titulo': "INÍCIO",              'corTema': fundoColor},
-    {'pagina': const AreaConsumoEnergia(),  'titulo': "CONSUMO DE ENERGIA",  'corTema': verdeThemeI},
-    {'pagina': const PaginaEconomia(),        'titulo': "ECONOMIA",            'corTema': laranjaTheme},
+    {'pagina': const AreaConsumoEnergia(),  'titulo': "CONSUMO DE ENERGIA",  'corTema': verdeThemeII},
+    {'pagina': const PaginaEconomia(),      'titulo': "ECONOMIA",            'corTema': laranjaTheme},
     {'pagina': const AreaEquipamentos(),    'titulo': "EQUIPAMENTOS",        'corTema': kabulTheme},
   ];
 
