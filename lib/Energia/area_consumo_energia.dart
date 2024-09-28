@@ -41,8 +41,8 @@ class _AreaConsumoEnergiaState extends State<AreaConsumoEnergia> {
   /// Método para simular o consumo de energia dos equipamentos.
   void simularConsumo(){
 
-    const double baseConsumo = 3.0;         // Base do consumo de energia.
-    const double baseGeracao = 70.0;         // Base da geracao de energia.
+    const double baseConsumo = 6.0;         // Base do consumo de energia.
+    const double baseGeracao = 5.0;         // Base da geracao de energia.
     const intervalo = Duration(seconds: 5); // Intervalo entre cada ciclo.
 
     // Simulacao da geracao/cosumo de energia.
@@ -54,7 +54,6 @@ class _AreaConsumoEnergiaState extends State<AreaConsumoEnergia> {
           // Verificacao de equipamentos que geram energia mais não consomem.
           if(equipamentos[randIndex].tipo == TipoEnum.painelSolar){
             equipamentos[randIndex].geracaoEnergia = Random().nextDouble() * baseGeracao;
-            equipamentos[randIndex].consumoEnergia = Random().nextDouble() * (-1);  // TODO: Rever.
           } else{
             equipamentos[randIndex].consumoEnergia = Random().nextDouble() * baseConsumo;
           }
@@ -99,7 +98,7 @@ class _AreaConsumoEnergiaState extends State<AreaConsumoEnergia> {
         ),
         Expanded(
           child: (equipamentos.isEmpty) ? widgetEquipamentoVazio
-              : GraficoEquipamentos(graficoConsumo: (graficosIndex != GraficosEnergia.porcentagemTipos)),
+              : GraficoEquipamentos(graficoEquipamentos: (graficosIndex == GraficosEnergia.porcentagemTipos)),
         ),
       ],
     );
