@@ -8,12 +8,12 @@ import '../Equipamentos/definicao_equipamento.dart';
 /// ###### Gráfico de porcentagem dos equipamentos no sistema.
 class GraficoEquipamentos extends StatefulWidget {
   /// ###### Gráfico de porcentagem dos equipamentos no sistema.
-  const GraficoEquipamentos({super.key, this.graficoConsumo = false});
+  const GraficoEquipamentos({super.key, this.graficoEquipamentos = false});
 
-  /// Indica se o gráfico vai exibir a porcetagem de
-  /// consumo de energia ao invés da porcentagem do
-  /// número de equipamentos no sistema.
-  final bool graficoConsumo;
+  /// Indica se o gráfico vai exibir a porcetagem de equipamentos
+  /// do mesmo tipo no sistema ao invés da porcentagem do consumo
+  /// de energia dos equipamentos.
+  final bool graficoEquipamentos;
 
   @override
   State<GraficoEquipamentos> createState() => _GraficoEquipamentosState();
@@ -22,6 +22,67 @@ class GraficoEquipamentos extends StatefulWidget {
 class _GraficoEquipamentosState extends State<GraficoEquipamentos> {
 
   int sectionTouchIndex = 0;  // Indice da fatia selecionada no grafico.
+
+
+  /// Método para calcular a quantidade de equipamentos do mesmo tipo.
+  int quantidadeEquipamentos(int index){
+    return equipamentos.where((element) {
+      return (element.tipo == tipos.entries.elementAt(index).key);
+    }).length;
+  }
+
+  /// Método para calcular o consumo de energia total
+  /// (líquido) de todos os equipamentos no sistema.
+  double calculoConsumoTotal(){
+    double consumoTotal = 0.01; // Consumo total de energia dos equipamentos.
+
+    // Calculo do consumo liquido total.
+    for(Equipamento element in equipamentos){
+      consumoTotal += element.consumoEnergia;
+      consumoTotal -= element.geracaoEnergia;
+    }
+
+    return consumoTotal;
+  }
+
+  /// Método para calcular o consumo de energia total
+  /// (líquido) de um tipo de equipamento no sistema.
+  double calculoConsumoTipo(int index){
+    double consumoTipo = 0.0; // Consumo total de energia do tipo de equipamento.
+
+    // Calculo do consumo liquido do tipo de equipamento.
+    equipamentos.where((element) {
+      return (element.tipo == tipos.entries.elementAt(index).key);
+    }).forEach((element) {
+      consumoTipo += element.consumoEnergia;
+      consumoTipo -= element.geracaoEnergia;
+    });
+
+    return consumoTipo;
+  }
+
+  /// Método para calcular as porcentagens de consumo/geração
+  /// de nergia dos equipamentos ou a porcentagem dos tipos
+  /// de equipamentos no sistema.
+  double calcularPorcentagens(int index){
+    if(widget.graficoEquipamentos){
+      return ((quantidadeEquipamentos(index) * 100) / equipamentos.length);
+    } else {
+      return ((calculoConsumoTipo(index) * 100) / calculoConsumoTotal());
+    }
+  }
+
+  /// Método para calcular a porcentagem da fatia que será
+  /// exibida no gráfico para cada tipo de equipamento.
+  double calcularFatia(double porcentagem){
+    double fatiaMinima = 10;  // Porcentagem minima da fatia para exibir no grafico.
+
+    // if(widget.graficoEquipamentos) { return porcentagem; }
+    // Verificacao para garantir que os equipamentos tenham uma fatia mínima visível.
+    if (porcentagem <= (2 * fatiaMinima)) { return fatiaMinima; }
+    else { return (porcentagem - fatiaMinima); }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -45,35 +106,8 @@ class _GraficoEquipamentosState extends State<GraficoEquipamentos> {
           TipoEnum.values.length,
           (index) {
 
-            double porcentagemFatia = 0;  // Porcentagem da fatia.
-
-            // Quantidade do tipo de equipamento no sistema.
-            int qntTipo = equipamentos.where(
-                  (element) { return element.tipo == tipos.entries.elementAt(index).key; },
-            ).length;
-
-            // Configuracao do grafico de tipo e de consumo.
-            if(widget.graficoConsumo == false){
-              porcentagemFatia = ((qntTipo * 100) / equipamentos.length); // Porcentagem do tipo de equipamento no sistema.
-            }
-            else{
-              double consumoTipo = 0.0;   // Consumo geral do tipo de equipamento.
-              double consumoTotal = 0.1;  // Consumo total dos equipamentos.
-
-              // Calculo do consumo total.
-              for(var element in equipamentos){
-                consumoTotal += element.consumoEnergia;
-                consumoTotal -= element.geracaoEnergia;
-              }
-
-              // Calculo do consumo geral do tipo de equipamento.
-              equipamentos.where((element) {
-                return (element.tipo == tipos.entries.elementAt(index).key);
-              }).forEach((element) => (consumoTipo += element.consumoEnergia));
-
-              // Porcentagem do consumo de energia.
-              porcentagemFatia = ((consumoTipo * 100) / consumoTotal).abs();
-            }
+            double porcentagens     = calcularPorcentagens(index);  // Porcentagem do consumo de energia ou dos tipos de equipamentos.
+            double porcentagemFatia = calcularFatia(porcentagens);  // Porcentagem da fatia do tipo de equipamento no grafico.
 
             Icon icone = tipos[TipoEnum.values.elementAt(index)]!['icone'];
             final bool isTouched = (index == sectionTouchIndex);                    // Indica se a fatia foi selecionada.
@@ -85,13 +119,13 @@ class _GraficoEquipamentosState extends State<GraficoEquipamentos> {
             final Color? corAvatar    = !isTouched ? Colors.white30 : Colors.cyanAccent[80];  // Cor de fundo do avatar do icone (Padrao/Selecionado).
 
             return PieChartSectionData(
-              color: icone.color,                 // Cor da fatia.
+              color:  icone.color,                // Cor da fatia.
               radius: radiusFatia,                // Preenchimento da fatia.
               value:  porcentagemFatia,           // Porcentagem da fatia.
               titlePositionPercentageOffset: .45, // Alinhamento do titulo.
               badgePositionPercentageOffset: .98, // Alinhamento do avatar do icone.
-              title: '${porcentagemFatia.toStringAsFixed(0)}%\n($qntTipo)', // Titulo.
               borderSide: BorderSide(width: !isTouched ? 1 : 2, color: Colors.black45),
+              title: '${porcentagens.toStringAsFixed(0)}%\n(${quantidadeEquipamentos(index)})', // Titulo.
               titleStyle: TextStyle(fontSize: fontSize, color: Colors.black, fontWeight: !isTouched ? FontWeight.normal : FontWeight.bold),
               badgeWidget: Container(
                 decoration: ShapeDecoration(shape: CircleBorder(side: BorderSide(color: icone.color!, width: !isTouched ? 1 : 3))),
