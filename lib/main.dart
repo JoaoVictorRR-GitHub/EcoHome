@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'pagina_home.dart';
 import 'Globais/funcoes.dart';
@@ -10,7 +11,12 @@ import 'Equipamentos/area_equipamentos.dart';
 
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => TimerModel(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -49,6 +55,18 @@ class _MyHomePageState extends State<MyHomePage> {
     {'pagina': const PaginaEconomia(),      'titulo': "ECONOMIA",            'corTema': laranjaTheme},
     {'pagina': const AreaEquipamentos(),    'titulo': "EQUIPAMENTOS",        'corTema': kabulTheme},
   ];
+
+  @override
+  void initState() {
+    Provider.of<TimerModel>(context, listen: false).simularConsumo();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    Provider.of<TimerModel>(context, listen: false).dispose();
+    super.dispose();
+  }
 
 
   @override
