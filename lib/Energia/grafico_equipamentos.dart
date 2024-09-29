@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:provider/provider.dart';
 
+import '../Globais/funcoes.dart';
 import '../Equipamentos/definicao_equipamento.dart';
 
 
@@ -86,59 +88,63 @@ class _GraficoEquipamentosState extends State<GraficoEquipamentos> {
 
   @override
   Widget build(BuildContext context) {
-    return PieChart(
-      PieChartData(
-        sectionsSpace: 10,      // Espacamento entre as fatias.
-        centerSpaceRadius: 30,  // Preenchimento central do grafico.
-        pieTouchData: PieTouchData(
-          touchCallback: (FlTouchEvent event, pieTouchResponse) {
-            setState(() {
-              // Verificacao de toque nas fatias.
-              if(!event.isInterestedForInteractions || pieTouchResponse == null || pieTouchResponse.touchedSection == null) {
-                sectionTouchIndex = -1;
-                return;
-              }
-              sectionTouchIndex = pieTouchResponse.touchedSection!.touchedSectionIndex;
-            });
-          },
-        ),
-        sections: List.generate(
-          TipoEnum.values.length,
-          (index) {
+    return Consumer<TimerModel>(
+      builder: (BuildContext context, timerModel, Widget? child) {
+        return PieChart(
+          PieChartData(
+            sectionsSpace: 10,      // Espacamento entre as fatias.
+            centerSpaceRadius: 30,  // Preenchimento central do grafico.
+            pieTouchData: PieTouchData(
+              touchCallback: (FlTouchEvent event, pieTouchResponse) {
+                setState(() {
+                  // Verificacao de toque nas fatias.
+                  if(!event.isInterestedForInteractions || pieTouchResponse == null || pieTouchResponse.touchedSection == null) {
+                    sectionTouchIndex = -1;
+                    return;
+                  }
+                  sectionTouchIndex = pieTouchResponse.touchedSection!.touchedSectionIndex;
+                });
+              },
+            ),
+            sections: List.generate(
+              TipoEnum.values.length,
+              (index) {
 
-            double porcentagens     = calcularPorcentagens(index);  // Porcentagem do consumo de energia ou dos tipos de equipamentos.
-            double porcentagemFatia = calcularFatia(porcentagens);  // Porcentagem da fatia do tipo de equipamento no grafico.
+                double porcentagens     = calcularPorcentagens(index);  // Porcentagem do consumo de energia ou dos tipos de equipamentos.
+                double porcentagemFatia = calcularFatia(porcentagens);  // Porcentagem da fatia do tipo de equipamento no grafico.
 
-            Icon icone = tipos[TipoEnum.values.elementAt(index)]!['icone'];
-            final bool isTouched = (index == sectionTouchIndex);                    // Indica se a fatia foi selecionada.
-            final double textScale    = (porcentagemFatia/(!isTouched ? 20 : 18));  // Escala da fonte do texto (Padrao/Selecionado).
-            final double fontSize     = (textScale * 16.0).clamp(12, 22);           // Fonte do texto (Padrao/Selecionado).
-            final double iconeScale   = !isTouched ? 1.3 : 1.7;                     // Escala do icone (Padrao/Selecionado).
-            final double radiusFatia  = !isTouched ? 100.0 : 110.0;                 // Preenchimento da fatia (Padrao/Selecionado).
-            final double radiusAvatar = !isTouched ? 30.0 : 36.0;                   // Preenchimento do avatar do icone (Padrao/Selecionado).
-            final Color? corAvatar    = !isTouched ? Colors.white30 : Colors.cyanAccent[80];  // Cor de fundo do avatar do icone (Padrao/Selecionado).
+                Icon icone = tipos[TipoEnum.values.elementAt(index)]!['icone'];
+                final bool isTouched = (index == sectionTouchIndex);                    // Indica se a fatia foi selecionada.
+                final double textScale    = (porcentagemFatia/(!isTouched ? 20 : 18));  // Escala da fonte do texto (Padrao/Selecionado).
+                final double fontSize     = (textScale * 16.0).clamp(12, 22);           // Fonte do texto (Padrao/Selecionado).
+                final double iconeScale   = !isTouched ? 1.3 : 1.7;                     // Escala do icone (Padrao/Selecionado).
+                final double radiusFatia  = !isTouched ? 100.0 : 110.0;                 // Preenchimento da fatia (Padrao/Selecionado).
+                final double radiusAvatar = !isTouched ? 30.0 : 36.0;                   // Preenchimento do avatar do icone (Padrao/Selecionado).
+                final Color? corAvatar    = !isTouched ? Colors.white30 : Colors.cyanAccent[80];  // Cor de fundo do avatar do icone (Padrao/Selecionado).
 
-            return PieChartSectionData(
-              color:  icone.color,                // Cor da fatia.
-              radius: radiusFatia,                // Preenchimento da fatia.
-              value:  porcentagemFatia,           // Porcentagem da fatia.
-              titlePositionPercentageOffset: .45, // Alinhamento do titulo.
-              badgePositionPercentageOffset: .98, // Alinhamento do avatar do icone.
-              borderSide: BorderSide(width: !isTouched ? 1 : 2, color: Colors.black45),
-              title: '${porcentagens.toStringAsFixed(0)}%\n(${quantidadeEquipamentos(index)})', // Titulo.
-              titleStyle: TextStyle(fontSize: fontSize, color: Colors.black, fontWeight: !isTouched ? FontWeight.normal : FontWeight.bold),
-              badgeWidget: Container(
-                decoration: ShapeDecoration(shape: CircleBorder(side: BorderSide(color: icone.color!, width: !isTouched ? 1 : 3))),
-                child: CircleAvatar(
-                  radius: radiusAvatar,
-                  backgroundColor: corAvatar,
-                  child: Transform.scale(scale: iconeScale, child: icone),
-                ),
-              ),
-            );
-          },
-        ),
-      ),
+                return PieChartSectionData(
+                  color:  icone.color,                // Cor da fatia.
+                  radius: radiusFatia,                // Preenchimento da fatia.
+                  value:  porcentagemFatia,           // Porcentagem da fatia.
+                  titlePositionPercentageOffset: .45, // Alinhamento do titulo.
+                  badgePositionPercentageOffset: .98, // Alinhamento do avatar do icone.
+                  borderSide: BorderSide(width: !isTouched ? 1 : 2, color: Colors.black45),
+                  title: '${porcentagens.toStringAsFixed(0)}%\n(${quantidadeEquipamentos(index)})', // Titulo.
+                  titleStyle: TextStyle(fontSize: fontSize, color: Colors.black, fontWeight: !isTouched ? FontWeight.normal : FontWeight.bold),
+                  badgeWidget: Container(
+                    decoration: ShapeDecoration(shape: CircleBorder(side: BorderSide(color: icone.color!, width: !isTouched ? 1 : 3))),
+                    child: CircleAvatar(
+                      radius: radiusAvatar,
+                      backgroundColor: corAvatar,
+                      child: Transform.scale(scale: iconeScale, child: icone),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 }
