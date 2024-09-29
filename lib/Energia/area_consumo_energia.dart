@@ -1,5 +1,3 @@
-import 'dart:math';
-import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'grafico_equipamentos.dart';
@@ -22,45 +20,7 @@ class AreaConsumoEnergia extends StatefulWidget {
 
 class _AreaConsumoEnergiaState extends State<AreaConsumoEnergia> {
 
-  Timer? _timer;  // Temporizador.
   GraficosEnergia graficosIndex = GraficosEnergia.porcentagemTipos; // Indice do grafico exibido.
-
-  @override
-  void initState() {
-    simularConsumo();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
-  }
-
-
-  /// Método para simular o consumo de energia dos equipamentos.
-  void simularConsumo(){
-
-    const double baseConsumo = 6.0;         // Base do consumo de energia.
-    const double baseGeracao = 5.0;         // Base da geracao de energia.
-    const intervalo = Duration(seconds: 5); // Intervalo entre cada ciclo.
-
-    // Simulacao da geracao/cosumo de energia.
-    _timer = Timer.periodic(intervalo, (Timer timer) {
-      if(equipamentos.isNotEmpty) {
-        setState(() {
-          int randIndex = Random().nextInt(equipamentos.length);  // Gera um indice aleatorio.
-
-          // Verificacao de equipamentos que geram energia mais não consomem.
-          if(equipamentos[randIndex].tipo == TipoEnum.painelSolar){
-            equipamentos[randIndex].geracaoEnergia = Random().nextDouble() * baseGeracao;
-          } else{
-            equipamentos[randIndex].consumoEnergia = Random().nextDouble() * baseConsumo;
-          }
-        });
-      }
-    });
-  }
 
 
   @override
