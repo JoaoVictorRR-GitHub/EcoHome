@@ -61,30 +61,44 @@ class TimerModel with ChangeNotifier {
 
   /// Método para simular o consumo de energia dos equipamentos.
   void simularConsumo() {
-    const double baseConsumo = 6.0;         // Base do consumo de energia.
-    const double baseGeracao = 5.0;         // Base da geracao de energia.
-    const intervalo = Duration(seconds: 5); // Intervalo entre cada ciclo.
+    double energiaAcumulada = 0.0;            // Energia acumulada do consumo/geracao de energia.
+    const double baseConsumo = 60.0;          // Base do consumo de energia (W).
+    const double baseGeracao = 50.0;          // Base da geracao de energia (W).
+    const intervalo = Duration(seconds: 10);  // Intervalo entre cada ciclo.
 
     // Simulacao da geracao/cosumo de energia (W).
     timer = Timer.periodic(intervalo, (Timer timer) {
       if(equipamentos.isNotEmpty) {
 
-        // Todo: gerar para todos de uma vez?
-        Gasto gasto;                                            // Gasto com o consumo/geracao de energia (R$).
-        int tempoAtual = timer.tick * intervalo.inSeconds;      // Tempo total em segundos desde o início
-        int randIndex = Random().nextInt(equipamentos.length);  // Gera um indice aleatorio.
+        double energiaTotal = 0.0;
+        int tempoAtual = timer.tick * intervalo.inSeconds;  // Tempo total (s) desde o início.
 
-        // Verificacao de equipamentos que geram energia mais não consomem.
-        if(equipamentos[randIndex].tipo == TipoEnum.painelSolar){
-          equipamentos[randIndex].geracaoEnergia = Random().nextDouble() * baseGeracao;
-          gasto = Gasto(-equipamentos[randIndex].geracaoEnergia, tempoAtual, intervalo.inSeconds);
-        } else{
-          equipamentos[randIndex].consumoEnergia = Random().nextDouble() * baseConsumo;
-          gasto = Gasto(equipamentos[randIndex].consumoEnergia, tempoAtual, intervalo.inSeconds);
+        // Loop para simular o consumo/geracao de energia dos equipamentos.
+        for(Equipamento element in equipamentos){
+
+          // Verificacao de equipamentos que geram energia mais não consomem.
+          if(element.tipo == TipoEnum.painelSolar){
+            element.geracaoEnergia = Random().nextDouble() * baseGeracao;
+            energiaTotal -= element.geracaoEnergia; // Credito.
+          } else{
+            element.consumoEnergia = Random().nextDouble() * baseConsumo;
+            energiaTotal += element.consumoEnergia; // Consumo.
+          }
         }
 
-        gastos.add(gasto);  // Adiciona o gasto na lista.
-        notifyListeners();  // Atualiza o State das páginas para exibir a alteração nos graficos.
+        energiaAcumulada += energiaTotal; // Acumulo da energia no tempo.
+
+        // Verificacao para otimizar o grafico de gastos.
+        if(gastos.length == 10){
+          gastos.add(Gasto(energiaAcumulada, tempoAtual.toDouble(), intervalo.inSeconds));  // Adiciona os gastos acumulados.
+          gastos.removeRange(0, gastos.length - 1);                                         // Remove os gastos anteriores.
+          energiaAcumulada = 0.0;                                                           // Reseta a energia acumulada.
+        }
+        else{
+          gastos.add(Gasto(energiaTotal, tempoAtual.toDouble(), intervalo.inSeconds));  // Adiciona o gasto de cada ciclo na lista.
+        }
+
+        notifyListeners();  // Atualiza o State das paginas para exibir a alteracao nos graficos.
       }
     });
   }
