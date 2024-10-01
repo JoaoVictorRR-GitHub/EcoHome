@@ -90,9 +90,9 @@ class TimerModel with ChangeNotifier {
 
         // Verificacao para otimizar o grafico de gastos.
         if(gastos.length == 10){
-          gastos.add(Gasto(energiaAcumulada, tempoAtual.toDouble(), 11 * intervalo.inSeconds)); // Adiciona os gastos acumulados (11).
+          gastos.add(Gasto(energiaAcumulada, tempoAtual.toDouble(), timer.tick * intervalo.inSeconds)); // Adiciona os gastos acumulados.
           gastos.removeRange(0, gastos.length - 1); // Remove os gastos anteriores.
-          energiaAcumulada = 0.0;                   // Reseta a energia acumulada.
+          gastoTotal = gastos.last.gasto;           // Atualizacao do gasto total.
         }
         else{
           gastos.add(Gasto(energiaTotal, tempoAtual.toDouble(), intervalo.inSeconds));  // Adiciona o gasto de cada ciclo na lista.
