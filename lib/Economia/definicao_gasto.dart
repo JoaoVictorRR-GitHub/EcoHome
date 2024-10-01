@@ -2,6 +2,11 @@ import 'dart:math';
 
 
 
+/// Gasto total (R$) em consumo e geração de energia
+/// dos equipamentos no sistema durante os ciclos.
+double gastoTotal = 0.0;
+
+
 /// ###### Classe de gasto.
 class Gasto {
 
