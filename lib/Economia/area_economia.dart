@@ -34,7 +34,7 @@ class _PaginaEconomiaState extends State<PaginaEconomia> {
             ),
             Container(
               padding: const EdgeInsets.all(15),
-              decoration: BoxDecoration(borderRadius: borderRadius10, color:  Colors.teal[50]),
+              decoration: BoxDecoration(borderRadius: borderRadius10),  // color: Colors.grey[200]),
               child: Text(
                 NumberFormat.simpleCurrency(locale: 'pt_BR', decimalDigits: 5).format(gastoTotal),
                 style: const TextStyle(fontSize: 20, color: verdeThemeI, fontWeight: FontWeight.bold),
