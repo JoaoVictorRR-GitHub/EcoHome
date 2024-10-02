@@ -52,7 +52,7 @@ class _GraficoGastoConsumoState extends State<GraficoGastoConsumo> {
               clipData: const FlClipData.all(),   // Configura a exibicao dos pontos nos limites do grafico.
               maxY: maxGasto,
               minY: minGasto,
-              backgroundColor: Colors.teal[100],
+              backgroundColor: Colors.grey[200],
               titlesData: FlTitlesData(           // Configuracao dos titulos.
                 // Titulo do topo.
                 topTitles: const AxisTitles(),
@@ -75,16 +75,26 @@ class _GraficoGastoConsumoState extends State<GraficoGastoConsumo> {
                     interval: 10, // Intervalo de exibicao do eixo X.
                     showTitles: true,
                     getTitlesWidget: (value, meta) {
-                      // Calculo para exibir o tempo.
-                      int seconds = value.toInt();
-                      int minutes = (seconds ~/ 60);
-                      int remainingSeconds = (seconds % 60);
 
-                      if (minutes > 0) {
-                        return Text('${minutes}m${remainingSeconds}s', style: const TextStyle(color: Colors.black, fontSize: 10));  // Exibe o tempo em formato (m) e (s).
+                      String displayTime;
+                      int totalSeconds = value.toInt();
+
+                      // Calculo para exibir o tempo.
+                      if (totalSeconds >= 3600) {
+                        // 1 hora ou mais.
+                        int hours = totalSeconds ~/ 3600;
+                        int minutes = (totalSeconds % 3600) ~/ 60;
+                        displayTime = '${hours}h${minutes}m';
+                      } else if (totalSeconds >= 60) {
+                        // Menos de 1 hora, mas mais de 1 minuto.
+                        int minutes = totalSeconds ~/ 60;
+                        int seconds = totalSeconds % 60;
+                        displayTime = '${minutes}m${seconds}s';
                       } else {
-                        return Text('${seconds}s', style: const TextStyle(color: Colors.black, fontSize: 10));  // Exibe o tempo em formato (s).
+                        displayTime = '${totalSeconds}s'; // Menos de 1 minuto.
                       }
+
+                      return Text(displayTime, style: const TextStyle(color: Colors.black, fontSize: 10));
                     },
                   ),
                 ),
@@ -103,11 +113,11 @@ class _GraficoGastoConsumoState extends State<GraficoGastoConsumo> {
                 LineChartBarData(
                   barWidth: 5,
                   isCurved: true,
-                  color: Colors.blue,
+                  color: verdeThemeI, // Colors.blue,
                   isStrokeCapRound: true,
                   dotData: FlDotData( // Configuracao dos pontos.
                     show: true,
-                    getDotPainter: (spot, percent, bar, index) => FlDotCirclePainter(radius: 5, strokeWidth: 2, color: Colors.blue, strokeColor: Colors.white),
+                    getDotPainter: (spot, percent, bar, index) => FlDotCirclePainter(radius: 5, strokeWidth: 2, color: verdeThemeI, strokeColor: Colors.white),
                   ),
                   spots: List.generate( // Configuracao dos dados.
                     gastos.length,
@@ -117,8 +127,10 @@ class _GraficoGastoConsumoState extends State<GraficoGastoConsumo> {
                     show: true,
                     gradient: LinearGradient(
                       colors: [
-                        Colors.blue.withOpacity(0.3),
-                        Colors.green.withOpacity(0.3),
+                        verdeThemeI.withOpacity(0.3),
+                        verdeThemeII.withOpacity(0.3),
+                        // Colors.blue.withOpacity(0.3),
+                        // Colors.green.withOpacity(0.3),
                       ],
                     ),
                   ),
@@ -131,8 +143,8 @@ class _GraficoGastoConsumoState extends State<GraficoGastoConsumo> {
                   fitInsideVertically: true,
                   fitInsideHorizontally: true,
                   tooltipPadding: const EdgeInsets.all(8),
-                  getTooltipColor: (spot) => Colors.blueGrey.withOpacity(0.8),
-                  tooltipBorder: const BorderSide(color: Colors.blue, width: 2),
+                  getTooltipColor: (spot) => Colors.grey.withOpacity(0.8),
+                  tooltipBorder: const BorderSide(color: verdeThemeI, width: 2),
                   getTooltipItems: (List<LineBarSpot> spots) {  // Style de exibicao do valor no ponto.
                     return spots.map((LineBarSpot spot) {
                       return LineTooltipItem('Valor: ${spot.y.toStringAsPrecision(5)}', styleTextoSelecionado);
