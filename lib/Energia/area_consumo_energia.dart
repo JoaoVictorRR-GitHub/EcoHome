@@ -46,12 +46,12 @@ class _AreaConsumoEnergiaState extends State<AreaConsumoEnergia> {
               onPressed: () { setState(() { graficosIndex = GraficosEnergia.porcentagemConsumo; }); },
               style: ButtonStyle(
                 elevation:        const WidgetStatePropertyAll(10),
-                backgroundColor:  const WidgetStatePropertyAll(Colors.pink),
-                overlayColor:     const WidgetStatePropertyAll(Colors.pinkAccent),
+                backgroundColor:  const WidgetStatePropertyAll(laranjaTheme),
+                overlayColor:     const WidgetStatePropertyAll(Colors.orangeAccent),
                 padding:          const WidgetStatePropertyAll(EdgeInsets.all(20)),
                 shape:            WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: borderRadius10)),
               ),
-              icon:   const Icon(Icons.timelapse_rounded, color: verdeThemeI),
+              icon:   const Icon(Icons.power_rounded, color: verdeThemeI),  // Icons.timelapse_rounded.
               label:  const Text('CONSUMO (%)', style: styleBotoesConfirmacao, textScaler: TextScaler.linear(0.8)),
             ),
           ],
