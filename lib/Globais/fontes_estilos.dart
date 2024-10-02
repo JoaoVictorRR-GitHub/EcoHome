@@ -31,7 +31,18 @@ const Color verdeThemeI  = Color.fromRGBO( 42,  75,  52, 1);
 const Color verdeThemeII = Color.fromRGBO(116, 156,  74, 1);
 const Color kabulTheme   = Color.fromRGBO(100,  84,  68, 1);
 
-const Color laranjaTheme = Color.fromRGBO(255, 159, 28, 1);
+const Color amareloClaro    = Color.fromRGBO(253, 226, 147, 1); // #FDE293
+const Color amareloDourado  = Color.fromRGBO(249, 199, 79,  1); // #F9C74F
+const Color amareloMostarda = Color.fromRGBO(212, 160, 21,  1); // #D4A015
+const Color laranjaClaro    = Color.fromRGBO(247, 141, 101, 1); // #F78D65
+const Color laranjaTheme    = Color.fromRGBO(244, 124, 34,  1); // #F47C22 - laranjaQueimado.
+const Color laranjaProfundo = Color.fromRGBO(217, 100, 44,  1); // #D9642C
+
+const Color cinzaClaro  = Color.fromRGBO(225, 225, 225, 1);  // #E1E1E1
+const Color begeClaro   = Color.fromRGBO(222, 215, 197, 1);  // #DED7C5
+const Color marromSuave = Color.fromRGBO(139, 106, 70,  1);  // #8B6A46
+
+// const Color laranjaTheme = Color.fromRGBO(255, 159, 28, 1);
 const Color amareloTheme = Color.fromRGBO(227, 181, 5, 1);
 
 
