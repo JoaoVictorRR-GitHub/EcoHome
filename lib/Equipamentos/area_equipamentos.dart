@@ -63,7 +63,7 @@ class _AreaEquipamentosState extends State<AreaEquipamentos> {
                   child: ListTile(
                     shape: OutlineInputBorder(borderRadius: borderRadius10, borderSide: const BorderSide(color: verdeThemeI, width: 2)),
                     titleTextStyle: const TextStyle(color: Colors.black, fontSize: 12, fontWeight: FontWeight.bold, height: 2),
-                    tileColor: Colors.white60,
+                    tileColor: fundoColor,  // Colors.white60,
                     horizontalTitleGap: 25,
                     dense:    true,
                     leading:  tipos[equipamentos[index].tipo]!['icone'],
