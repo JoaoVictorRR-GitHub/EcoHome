@@ -70,7 +70,7 @@ class _AreaHomeState extends State<AreaHome> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.info_rounded, color: verdeThemeII),
+                  Icon(Icons.info_rounded, color: fundoColor),
                   Padding(padding: EdgeInsets.only(top: 10)),
                   Text('SOBRE O APLICATIVO', style: TextStyle(color: fundoColor, fontSize: 15, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
                 ],
