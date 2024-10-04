@@ -10,15 +10,15 @@ import '../Globais/fontes_estilos.dart';
 
 
 /// ###### Área para visualizar dados sobre os gastos com o consumo de energia dos equipamentos.
-class PaginaEconomia extends StatefulWidget {
+class AreaEconomia extends StatefulWidget {
   /// ###### Área para visualizar dados sobre os gastos com o consumo de energia dos equipamentos.
-  const PaginaEconomia({super.key});
+  const AreaEconomia({super.key});
 
   @override
-  State<PaginaEconomia> createState() => _PaginaEconomiaState();
+  State<AreaEconomia> createState() => _AreaEconomiaState();
 }
 
-class _PaginaEconomiaState extends State<PaginaEconomia> {
+class _AreaEconomiaState extends State<AreaEconomia> {
 
   @override
   Widget build(BuildContext context) {
