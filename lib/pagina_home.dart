@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:eco_home/main.dart';
+import 'package:eco_home/info.dart';
 import 'Globais/fontes_estilos.dart';
 
 
@@ -15,6 +15,15 @@ class AreaHome extends StatefulWidget {
 }
 
 class _AreaHomeState extends State<AreaHome> {
+
+  late InfoApp informacoesAPP;  // Informacoes da aplicacao.
+
+  @override
+  void initState() {
+    informacoesAPP = InfoApp(context);
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +43,7 @@ class _AreaHomeState extends State<AreaHome> {
         InkWell(
           highlightColor: verdeThemeI,  // Cor quando  o card eh pressionado.
           customBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-          onTap: () {
-            // Redirecionamento para a pagina do topico quando clicado.
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const MyHomePage()));
-          },
+          onTap: () { informacoesAPP.exibirInfo(); }, // Exibe as informações do app.
           child: const Card(
             //elevation: 50,
             shape: OutlineInputBorder(borderSide: BorderSide(color: verdeThemeI,  strokeAlign: 2, width: 2, style: BorderStyle.solid)),
