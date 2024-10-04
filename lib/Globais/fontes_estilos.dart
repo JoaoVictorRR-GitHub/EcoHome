@@ -47,16 +47,25 @@ const Color amareloTheme = Color.fromRGBO(227, 181, 5, 1);
 
 
 // Offsets e sombras dos textos.
-const Offset offsetsI    = Offset(3, 2);
-const Offset offsetsII   = Offset(-3, 2);
+/// Offset(3, 2)
+const Offset offsetsI   = Offset(3, 2);
+/// Offset(-3, 2)
+const Offset offsetsII  = Offset(-3, 2);
+/// Offset(0, 3)
+const Offset offsetsIII = Offset(0, 3);
+/// Offset(0, -3)
+const Offset offsetsIV  = Offset(0, -3);
 const Shadow sombraPadraoI  = Shadow(color: Colors.black, offset: offsetsI);
 const Shadow sombraPadraoII = Shadow(color: Colors.white54, offset: Offset(2, 2));
 
 
 // Estilos de texto do sistema.
-const TextStyle styleTextoNormal          = TextStyle(fontSize: 12, color: Colors.black);
+const TextStyle styleTextoNormal          = TextStyle(fontSize: 15, color: Colors.black);
 const TextStyle styleTextoPadrao          = TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold);
 const TextStyle styleTextoPadrao2         = TextStyle(fontSize: 14, color: fundoColor, fontWeight: FontWeight.bold);
 const TextStyle styleBotoesConfirmacao    = TextStyle(color: fundoColor, fontWeight: FontWeight.bold);
 const TextStyle styleTextoSelecionado     = TextStyle(fontSize: 15, color: Colors.white, fontWeight: FontWeight.bold, shadows: [Shadow(color: verdeThemeII, offset: offsetsI)]);
 const TextStyle styleTextoNaoSelecionado  = TextStyle(fontSize: 12, color: verdeThemeI,  fontWeight: FontWeight.bold, shadows: [Shadow(color: Colors.black38, offset: Offset(2, 2))]);
+
+const TextStyle styleTextoSelecionado2    = TextStyle(fontSize: 12, color: fundoColor,  fontWeight: FontWeight.w700, shadows: [Shadow(color: verdeThemeII, offset: offsetsI)]);
+const TextStyle styleTextoNaoSelecionado2 = TextStyle(fontSize: 10, color: verdeThemeI, fontWeight: FontWeight.w400, shadows: [Shadow(color: Colors.black38, offset: Offset(1, 1))]);
