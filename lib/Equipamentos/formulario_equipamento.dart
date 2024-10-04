@@ -107,7 +107,16 @@ class _FormularioEquipamentoState extends State<FormularioEquipamento> {
                   onSaved: (newValue) { novoEquipamento.tipo = newValue!; },
                   validator: (value) { return (value == null) ? mensagemCampoVazio : null; },
                   items: tipos.entries.map((elemento) { // Itens.
-                    return DropdownMenuItem(value: elemento.key, child: Text(elemento.value['nome']));
+                    return DropdownMenuItem(
+                      value: elemento.key,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(elemento.value['nome']),
+                          elemento.value['icone'],
+                        ],
+                      ),
+                    );
                   }).toList(),
                   style: styleTextoNormal,        // Estilo do texto.
                   dropdownColor: fundoColor,      // Cor de DropDown.
