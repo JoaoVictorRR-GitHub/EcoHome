@@ -36,7 +36,7 @@ class _AreaConsumoEnergiaState extends State<AreaConsumoEnergia> {
                 elevation:        const WidgetStatePropertyAll(10),
                 backgroundColor:  const WidgetStatePropertyAll(verdeThemeI),
                 overlayColor:     const WidgetStatePropertyAll(verdeThemeII),
-                padding:          const WidgetStatePropertyAll(EdgeInsets.all(20)),
+                padding:          const WidgetStatePropertyAll(EdgeInsets.all(14)),
                 shape:            WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: borderRadius10)),
               ),
               icon:   const Icon(Icons.ad_units_rounded, color: Colors.pink),
@@ -48,7 +48,7 @@ class _AreaConsumoEnergiaState extends State<AreaConsumoEnergia> {
                 elevation:        const WidgetStatePropertyAll(10),
                 backgroundColor:  const WidgetStatePropertyAll(laranjaTheme),
                 overlayColor:     const WidgetStatePropertyAll(Colors.orangeAccent),
-                padding:          const WidgetStatePropertyAll(EdgeInsets.all(20)),
+                padding:          const WidgetStatePropertyAll(EdgeInsets.all(14)),
                 shape:            WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: borderRadius10)),
               ),
               icon:   const Icon(Icons.power_rounded, color: verdeThemeI),  // Icons.timelapse_rounded.
