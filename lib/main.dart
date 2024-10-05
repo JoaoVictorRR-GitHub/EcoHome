@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import 'pagina_home.dart';
@@ -136,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
       onPopInvokedWithResult: (didPop, result) async {
         didPop = await mensagemConfirmacao(context, 'Sair da Aplicação', 'Deseja realmente sair da aplicação ?');
         result = didPop;
-        if(didPop && context.mounted) Navigator.pop(context);
+        if(didPop) SystemNavigator.pop(); // Navigator.pop(context);
       },
       child: Scaffold(
         appBar: AppBar(
