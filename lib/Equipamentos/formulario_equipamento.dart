@@ -86,8 +86,8 @@ class _FormularioEquipamentoState extends State<FormularioEquipamento> {
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) async {
-        didPop = await sairFormularioConfirmacao();
-        if(didPop && context.mounted) Navigator.pop(context); // Fechamento do formulario.
+        if (didPop) return;
+        if(await sairFormularioConfirmacao() && context.mounted) Navigator.pop(context);  // Fechamento do formulario.
       },
       child: SimpleDialog(
         backgroundColor:  verdeThemeI,
