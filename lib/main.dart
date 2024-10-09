@@ -135,9 +135,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) async {
-        didPop = await mensagemConfirmacao(context, 'Sair da Aplicação', 'Deseja realmente sair da aplicação ?');
-        result = didPop;
-        if(didPop) SystemNavigator.pop(); // Navigator.pop(context);
+        if(didPop) return;
+        if(await mensagemConfirmacao(context, 'Sair da Aplicação', 'Deseja realmente sair da aplicação ?')) SystemNavigator.pop();
       },
       child: Scaffold(
         appBar: AppBar(
