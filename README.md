@@ -80,3 +80,9 @@ Essa área exibe os equipamentos adicionados ao sistema e apresenta uma ferramen
 * Tipos de equipamentos que consomem energia, como $$\color[RGB]{196, 188, 172} \textbf{Ar-Condicionado}$$, $$\color[RGB]{139, 106, 70} \textbf{Geladeira}$$, $$\color[RGB]{227, 181, 5} \textbf{Lâmpada}$$ e $$\color{Green} \textbf{Outros}$$, têm um multiplicador de **60W** para a base de consumo, enquanto os equipamentos do tipo $$\color[RGB]{244, 124, 34} \textbf{Painel Solar}$$ têm um multiplicador de **50W** para a base de geração de energia.
 
 ---
+
+### $$\color{OrangeRed} \textbf{LICENÇA}$$
+
+Este projeto está licenciado sob a [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0). Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+---
