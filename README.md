@@ -1,7 +1,7 @@
 # $$\textbf{Eco} \color{Green} \textbf{Home}$$
 
 <p align="justify">
-O **EcoHome** é uma aplicação desenvolvida para um projeto de feira de ciências cuja ideia é a de poder gerir o consumo e a geração de energia elétrica numa casa, com equipamentos capazes de transmitir dados de consumo por meio de sensores, visando uma utilização mais sustentável da energia elétrica nas residências.
+O <strong>EcoHome</strong> é uma aplicação desenvolvida para um projeto de feira de ciências cuja ideia é a de poder gerir o consumo e a geração de energia elétrica numa casa, com equipamentos capazes de transmitir dados de consumo por meio de sensores, visando uma utilização mais sustentável da energia elétrica nas residências.
   
 O objetivo da aplicação é obter dados de consumo e geração de energia dos equipamentos adicionados ao sistema, que estão integrados à rede elétrica da casa, para fornecer ao morador uma visão geral de quais equipamentos podem estar consumindo mais energia, quanto que a geração de energia elétrica da casa pode estar impactando positivamente na diminuição do consumo de energia da rede elétrica e trazer uma previsão dos gastos totais com a utilização da energia elétrica ao longo do tempo, com base nas tarifas locais.
 </p>
