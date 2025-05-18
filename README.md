@@ -21,12 +21,12 @@
 
 ### | $$\color{RedOrange} \textbf{FUNCIONALIDADES}$$ 📑
 
-- Simulação de consumo energético em tempo real.
-- Visualização de gráficos e despesas ao longo do tempo.
-- Cadastro de dispositivos eletrônicos e seus consumos.
+- Simulação de consumo e geração de energia elétrica em tempo real.
+- Visualização de gráficos dinâmicos e projeções de despesas.
+- Cadastro e remoção de dispositivos eletrônicos e seus consumos.
 
 
-  ### | $$\color[RGB]{249, 199, 79} \textbf{TELA INICIAL}$$
+  ### | 🏠 $$\color[RGB]{249, 199, 79} \textbf{TELA INICIAL}$$
   ---
   <section align="center">
     <img src="https://github.com/JoaoVictorRR-GitHub/EcoHome/raw/master/Exibicao/Inicio.jpg" width="20%"/>
@@ -34,7 +34,7 @@
   
   
   
-  ### | $$\color{LightGreen} \textbf{TELA DE CONSUMO}$$
+  ### | 🔌 $$\color{LightGreen} \textbf{TELA DE CONSUMO}$$
   ---
   <p align="justify">
     Na aba de <strong>equipamentos</strong> (<strong>Imagem 01</strong>) é exibido um gráfico dinâmico de pizza com a porcentagem de
@@ -55,7 +55,7 @@
   
   
   
-  ### | $$\color[RGB]{246, 249, 244} \textbf{TELA DE ECONOMIA}$$
+  ### | 💸 $$\color[RGB]{246, 249, 244} \textbf{TELA DE ECONOMIA}$$
   ---
   <p align="justify">
     Na tela de economia é exibido um gráfico de custos acumulados, em reais (<strong>R$</strong>), que atualiza
@@ -84,7 +84,7 @@
   
   
   
-  ## | $$\color{Green} \textbf{TELA DE EQUIPAMENTOS}$$
+  ## | ⚙️ $$\color{Green} \textbf{TELA DE EQUIPAMENTOS}$$
   
   <p align="justify">
     Essa tela exibe os equipamentos integrados ao sistema e disponibiliza formas para adicionar novos equipamentos ou removê-los.
